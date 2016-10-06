@@ -9,8 +9,11 @@ typedef struct S_CompSciStudent {
 
 const int MAX_STUDENTS = 4;
 
-void printList(*allCars) {
+void printList(CompSciStudent *students, int numStudents) {
     printf("Printing List...\n");
+    for(int i = 0; i < numStudents; i++){
+      printf("%s, %s:\t%c", students[i].lastName, students[i].firstName, students[i].letterGrade);
+    }
 }
 
 int addStudent(CompSciStudent *student) {
@@ -19,12 +22,12 @@ int addStudent(CompSciStudent *student) {
     fgets(input, 31, stdin);
     int ok = 0;
 
-    int res = sscanf(input, "%s %s %c", student->firstName, &student->lastName, &student->letterGrade);
+    int res = sscanf(input, "%s %s %c", &student->firstName, &student->lastName, &student->letterGrade);
     if(res == 3){
         ok = 1;
-        printf("Added:%s,\t%s\t%c\n\n", student->lastName, student->firstName, student->letterGrade);
+        printf("Added: %s,\t%s\t%c\n", student->lastName, student->firstName, student->letterGrade);
     }else
-        printf("Sorry, error parsing input\n\n");
+        printf("Sorry, error parsing input\n");
     return ok;
 }
 
@@ -46,10 +49,10 @@ void main(){
             printf("\nExiting...\n");
             break;
         } else if(strncmp(command, "print", 5) == 0) {
-            printList();
+            printList(students, numStudents);
         }else if(strncmp(command, "add", 3) == 0){
             if(numStudents < MAX_STUDENTS){
-                numStudents += addStudent(&students[numCars]);
+                numStudents += addStudent(&students[numStudents]);
             }else{
                 printf("List is full. Could not add student\n\n");
             }
@@ -59,4 +62,3 @@ void main(){
     }
     return;
 }
-
