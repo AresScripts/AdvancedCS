@@ -12,7 +12,8 @@ const int MAX_STUDENTS = 4;
 void printList(CompSciStudent *students, int numStudents) {
     printf("Printing List...\n");
     for(int i = 0; i < numStudents; i++){
-      printf("%s, %s:\t%c", students[i].lastName, students[i].firstName, students[i].letterGrade);
+      if(students[i].letterGrade != '\0')
+        printf("%s, %s:\t%c\n", students[i].lastName, students[i].firstName, students[i].letterGrade);
     }
 }
 
